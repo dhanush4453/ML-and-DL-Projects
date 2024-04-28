@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentiment analysis for incoming calls for helpdesk</title>
+<style>
+  /* CSS styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to bottom right, #000, #333);
+    color: #000;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  #container {
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  #myForm {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .error-message {
+    color: #ff0000;
+    margin-top: 5px;
+  }
+
+  #submitBtn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  #submitBtn:hover {
+    background-color: #0056b3;
+  }
+
+  #thankYouMessage {
+    display: none;
+    color: #4CAF50;
+    font-size: 24px;
+    margin-top: 20px;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  h1 {
+    color: #000;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    color: #000;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    color: purple; /* changed color to purple */
+    font-size: 28px; /* increased font size */
+    margin-bottom: 20px;
+  }
+
+  hr {
+    width: 50%;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+  }
+
+  .welcome-message {
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HTML structure -->
+<div id="container">
+  <h3>Get Your Sentiment Here</h3> <!-- Bigger heading outside the form -->
+  <div class="welcome-message">Welcome! Please fill in your details below:</div>
+  <hr>
+  <h1>Know it here</h1>
+  <form id="myForm">
+    <label for="firstName">First Name:</label><br>
+    <input type="text" id="firstName" name="firstName" required><br>
+    <div id="firstNameError" class="error-message"></div>
+    <label for="lastName">Last Name:</label><br>
+    <input type="text" id="lastName" name="lastName" required><br>
+    <div id="lastNameError" class="error-message"></div><br>
+    <button type="button" id="submitBtn">Submit</button> <!-- Changed type to button -->
+  </form>
+
+  <div id="thankYouMessage">Thank you!</div>
+</div>
+
+<script>
+  
+  document.getElementById("submitBtn").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevents form submission
+
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var firstNameError = document.getElementById("firstNameError");
+    var lastNameError = document.getElementById("lastNameError");
+
+    if (firstName === "") {
+      firstNameError.innerHTML = "Please enter your first name.";
+      return;
+    } else {
+      firstNameError.innerHTML = "";
+    }
+
+    if (lastName === "") {
+      lastNameError.innerHTML = "Please enter your last name.";
+      return;
+    } else {
+      lastNameError.innerHTML = "";
+    }
+
+    displayThankYouMessage();
+    gotoanother();
+  });
+
+  function displayThankYouMessage() {
+    document.getElementById("thankYouMessage").style.display = "block";
+  }
+
+  function gotoanother()
+  {
+    window.location.href = "add";
+  }
+
+</script>
+
+</body>
+</html>

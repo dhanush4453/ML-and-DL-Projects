@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentiment Count Graph</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div style="width: 80%; margin: auto;">
+    <canvas id="sentimentChart" width="800" height="400"></canvas>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var sentimentData = {
+        'negative': 3,
+        'neutral': 0,
+        'positive': 2
+    };
+
+    var sentiments = Object.keys(sentimentData);
+    var counts = Object.values(sentimentData);
+
+    var colors = {
+        'negative': 'rgba(255, 99, 132, 0.5)', // Red for negative sentiment
+        'neutral': 'rgba(54, 162, 235, 0.5)', // Blue for neutral sentiment
+        'positive': 'rgba(75, 192, 192, 0.5)' // Green for positive sentiment
+    };
+
+
+    var ctx = document.getElementById('sentimentChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: sentiments,
+            datasets: [{
+                label: 'Sentiment Count',
+                data: counts,
+                backgroundColor: sentiments.map(sentiment => colors[sentiment]), 
+                borderColor: sentiments.map(sentiment => colors[sentiment]), 
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Count'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Sentiment' 
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
